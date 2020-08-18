@@ -1,5 +1,6 @@
 package br.com.softplan.pessoas.domain.service;
 
+import br.com.softplan.pessoas.domain.exception.RecursoNaoEncontradoException;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 import br.com.softplan.pessoas.domain.repository.PessoaRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class PessoaService {
     @Transactional(readOnly = true)
     public Pessoa obterPorId(Long id) {
         return this.pessoaRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada."));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pessoa não encontrada."));
     }
 
     @Transactional
