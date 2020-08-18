@@ -3,9 +3,11 @@ package br.com.softplan.pessoas.domain.service;
 import br.com.softplan.pessoas.domain.exception.RecursoNaoEncontradoException;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 import br.com.softplan.pessoas.domain.repository.PessoaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +33,20 @@ public class PessoaService {
     @Transactional
     public Pessoa salvar(Pessoa pessoa) {
         return this.pessoaRepository.save(pessoa);
+    }
+
+    @Transactional
+    public Pessoa atualizar(Long id, Pessoa pessoa) {
+
+        Pessoa pessoaAtual = this.obterPorId(id);
+
+        BeanUtils.copyProperties(pessoa, pessoaAtual, "id", "dataCadastro", "dataAtualizacao");
+
+        pessoaAtual.setDataAlteracao(LocalDateTime.now());
+
+        Pessoa pessoaAtualizada = this.salvar(pessoaAtual);
+
+        return this.salvar(pessoaAtualizada);
     }
 
     @Transactional
