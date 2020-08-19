@@ -7,6 +7,6 @@ CREATE TABLE pessoas (
     naturalidade varchar(20),
     nacionalidade varchar(20),
     cpf varchar(20),
-    data_cadastro timestamp,
+    data_cadastro timestamp default now(),
     data_alteracao timestamp default now()
 );

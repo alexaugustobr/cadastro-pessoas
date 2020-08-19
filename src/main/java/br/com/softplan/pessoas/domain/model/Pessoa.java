@@ -19,6 +19,7 @@ public class Pessoa {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
     @Enumerated(value = EnumType.STRING)
@@ -27,18 +28,17 @@ public class Pessoa {
     private String email;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @Column(name = "data_nascimento")
+    @Column(nullable = false)
     private LocalDate dataNascimento;
 
     private String naturalidade;
 
     private String nacionalidade;
 
+    @Column(unique = true)
     private String cpf;
 
-    @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
-    @Column(name = "data_alteracao")
     private LocalDateTime dataAlteracao;
 }

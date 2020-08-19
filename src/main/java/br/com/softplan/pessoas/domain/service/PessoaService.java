@@ -44,9 +44,7 @@ public class PessoaService {
 
         pessoaAtual.setDataAlteracao(LocalDateTime.now());
 
-        Pessoa pessoaAtualizada = this.salvar(pessoaAtual);
-
-        return this.salvar(pessoaAtualizada);
+        return this.salvar(pessoaAtual);
     }
 
     @Transactional
