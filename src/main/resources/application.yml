@@ -11,4 +11,7 @@ spring:
             client-id: 364019609391-l897u16hg9q7t5nhh5kn263rfjs3as4h.apps.googleusercontent.com
             client-secret: jFN_wGaXCtv1S6KjOnx2XzUC
 
-
+app:
+  source:
+    code:
+      url: https://github.com/william-balan/cadastro-pessoas
