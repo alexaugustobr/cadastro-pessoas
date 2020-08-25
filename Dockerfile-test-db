@@ -1,0 +1,6 @@
+FROM mysql:5.7
+
+COPY ./src/main/resources/db/migration/ /docker-entrypoint-initdb.d/
+
+ENV MYSQL_ROOT_PASSWORD=root \
+    MYSQL_DATABASE=test-db
