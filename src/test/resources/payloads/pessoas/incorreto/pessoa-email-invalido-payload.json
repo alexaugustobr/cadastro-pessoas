@@ -1,0 +1,9 @@
+ {
+  "nome": "Nova Pessoa",
+  "sexo": "MASCULINO",
+  "cpf": "239.641.590-50",
+  "email": "email",
+  "dataNascimento": "17/09/1998",
+  "nacionalidade": "Brasileiro",
+  "naturalidade": "Mocoquense"
+}

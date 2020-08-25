@@ -1,14 +1,17 @@
 package br.com.softplan.pessoas.api.model;
 
-import br.com.softplan.pessoas.domain.model.Genero;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import org.hibernate.validator.constraints.br.CPF;
+import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import br.com.softplan.pessoas.domain.model.Genero;
+import lombok.Data;
 
 @Data
 public class PessoaInput {

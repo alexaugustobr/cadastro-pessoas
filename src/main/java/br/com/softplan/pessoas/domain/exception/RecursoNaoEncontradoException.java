@@ -5,7 +5,9 @@ package br.com.softplan.pessoas.domain.exception;
  */
 public class RecursoNaoEncontradoException extends RuntimeException {
 
-    public RecursoNaoEncontradoException(String message) {
+	private static final long serialVersionUID = -2770807206423104742L;
+
+	public RecursoNaoEncontradoException(String message) {
         super(message);
     }
 

@@ -1,0 +1,9 @@
+{
+  "nome": "Fulano",
+  "sexo": "MASCULINO",
+  "cpf": "773.554.880-07",
+  "email": "fulano@email.com",
+  "dataNascimento": "10/03/1998",
+  "nacionalidade": "Brasileiro",
+  "naturalidade": "Mocoquense"
+}

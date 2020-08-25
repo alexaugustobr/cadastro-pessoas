@@ -1,10 +1,11 @@
 package br.com.softplan.pessoas.api.assembler;
 
-import br.com.softplan.pessoas.api.model.PessoaInput;
-import br.com.softplan.pessoas.domain.model.Pessoa;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.softplan.pessoas.api.model.PessoaInput;
+import br.com.softplan.pessoas.domain.model.Pessoa;
 
 @Component
 public class PessoaInputDisassembler {
