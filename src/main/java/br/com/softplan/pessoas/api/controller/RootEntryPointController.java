@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softplan.pessoas.api.openapi.RootEntryPointControllerOpenApi;
+
 
 @RestController
 @RequestMapping("/")
-public class RootEntryPointController {
+public class RootEntryPointController implements RootEntryPointControllerOpenApi {
     
     @GetMapping(value="")
     public RootEntryPointModel root() {
@@ -23,6 +25,6 @@ public class RootEntryPointController {
     }
     
     
-    private static class RootEntryPointModel extends RepresentationModel<RootEntryPointModel> {
+    public static class RootEntryPointModel extends RepresentationModel<RootEntryPointModel> {
     }
 }

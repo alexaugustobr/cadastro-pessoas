@@ -26,12 +26,13 @@ import br.com.softplan.pessoas.api.assembler.PessoaInputDisassembler;
 import br.com.softplan.pessoas.api.assembler.PessoaModelAssembler;
 import br.com.softplan.pessoas.api.model.PessoaInput;
 import br.com.softplan.pessoas.api.model.PessoaModel;
+import br.com.softplan.pessoas.api.openapi.PessoaControllerOpenAPI;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 import br.com.softplan.pessoas.domain.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")
-public class PessoaController {
+public class PessoaController implements PessoaControllerOpenAPI {
 
     private PessoaService pessoaService;
 

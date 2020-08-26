@@ -23,7 +23,7 @@ public class PessoaInput {
 
     private Genero sexo;
 
-    @Email
+    @Email(regexp=".*@.*\\..*")
     private String email;
 
     @NotNull

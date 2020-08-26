@@ -11,6 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -28,14 +33,17 @@ public class Pessoa {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false)
     private String nome;
 
     @Enumerated(value = EnumType.STRING)
     private Genero sexo;
 
+    @Email(regexp = ".*@.*\\..*")
     private String email;
 
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(nullable = false)
     private LocalDate dataNascimento;
@@ -44,6 +52,8 @@ public class Pessoa {
 
     private String nacionalidade;
 
+    @CPF
+    @NotEmpty
     @Column(unique = true)
     private String cpf;
 
