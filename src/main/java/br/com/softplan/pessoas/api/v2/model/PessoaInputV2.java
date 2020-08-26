@@ -2,6 +2,7 @@ package br.com.softplan.pessoas.api.v2.model;
 
 import java.time.LocalDate;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class PessoaInputV2 {
     @NotEmpty
     private String cpf;
 
+    @Valid
     @NotNull
     private EnderecoInputV2 endereco;
 }
