@@ -1,4 +1,4 @@
-package br.com.softplan.pessoas.api.model;
+package br.com.softplan.pessoas.api.v1.model;
 
 import java.time.LocalDate;
 

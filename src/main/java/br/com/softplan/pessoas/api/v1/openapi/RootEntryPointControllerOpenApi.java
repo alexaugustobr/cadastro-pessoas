@@ -1,6 +1,6 @@
-package br.com.softplan.pessoas.api.openapi;
+package br.com.softplan.pessoas.api.v1.openapi;
 
-import br.com.softplan.pessoas.api.controller.RootEntryPointController.RootEntryPointModel;
+import br.com.softplan.pessoas.api.v1.controller.RootEntryPointController.RootEntryPointModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

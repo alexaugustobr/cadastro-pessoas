@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import br.com.softplan.pessoas.domain.model.Endereco;
 import br.com.softplan.pessoas.domain.model.Genero;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 import br.com.softplan.pessoas.domain.repository.PessoaRepository;
@@ -27,7 +28,7 @@ import io.restassured.http.ContentType;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("/application-test.properties")
-public class CadastroPessoasTest {
+public class CadastroPessoasV2Test {
 	@LocalServerPort
 	private int port;
 
@@ -35,21 +36,25 @@ public class CadastroPessoasTest {
 	private PessoaRepository repository;
 
 	private String jsonBeltranoCorreto = ResourceUtils.getContentFromResource(
-			"/payloads/pessoas/correto/beltrano-post-payload.json");
+			"/payloads/pessoas/v2/correto/beltrano-post-payload.json");
 
 	private String jsonFulanoPutCorreto = ResourceUtils.getContentFromResource(
-			"/payloads/pessoas/correto/fulano-put-payload.json");
+			"/payloads/pessoas/v2/correto/fulano-put-payload.json");
 
 	private String jsonPessoaSemNome = ResourceUtils.getContentFromResource(
-			"/payloads/pessoas/incorreto/pessoa-sem-nome-payload.json"
+			"/payloads/pessoas/v2/incorreto/pessoa-sem-nome-payload.json"
 	);
 
 	private String jsonPessoaCpfRepetido = ResourceUtils.getContentFromResource(
-			"/payloads/pessoas/incorreto/pessoa-cpf-repetido-payload.json"
+			"/payloads/pessoas/v2/incorreto/pessoa-cpf-repetido-payload.json"
 	);
 
 	private String jsonPessoaEmailInvalido = ResourceUtils.getContentFromResource(
-			"/payloads/pessoas/incorreto/pessoa-email-invalido-payload.json"
+			"/payloads/pessoas/v2/incorreto/pessoa-email-invalido-payload.json"
+	);
+
+	private String jsonPessoaSemEndereco = ResourceUtils.getContentFromResource(
+			"/payloads/pessoas/v2/incorreto/pessoa-sem-endereco-payload.json"
 	);
 	
 	private Pessoa fulano;
@@ -58,11 +63,13 @@ public class CadastroPessoasTest {
 	private static final int QUANTIDADE_PESSOAS = 2;
 	private static final int ID_PESSOA_INEXISTENTE = -1;
 
+	private static final String BASIC_AUTH_HEADER = "Basic cGVzc29hOjEyMw==";
+
 	@BeforeEach
 	public void setUp() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.port = port;
-		RestAssured.basePath = "/pessoas";
+		RestAssured.basePath = "/v2/pessoas";
 
 		this.prepararDados();
 	}
@@ -71,11 +78,22 @@ public class CadastroPessoasTest {
 	public void tearDown() {
 		this.limparTabelaPessoas();
 	}
+	
+	@Test
+	public void deveRetornar401_QuandoNaoInformarAutenticacaoBasic() {
+		given()
+			.accept(ContentType.JSON)
+		.when()
+			.get()
+		.then()
+			.statusCode(HttpStatus.UNAUTHORIZED.value());
+	}
 
 	@Test
 	public void deveRetornar200_QuandoObterPessoas() {
 		given()
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.get()
 		.then()
@@ -87,6 +105,7 @@ public class CadastroPessoasTest {
 	public void deveRetornarFulanoEStatus200_QuandoObterPorId() {
 		given()
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.get("/{id}", this.fulano.getId())
 		.then()
@@ -100,6 +119,7 @@ public class CadastroPessoasTest {
 			.body(jsonBeltranoCorreto)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.post()
 		.then()
@@ -112,6 +132,7 @@ public class CadastroPessoasTest {
 			.body(jsonFulanoPutCorreto)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.put("/{id}", this.fulano.getId())
 		.then()
@@ -123,6 +144,7 @@ public class CadastroPessoasTest {
 	public void deveRetornar204_QuandoRemoverPessoas() {
 		given()
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.delete("/{id}", this.fulano.getId())
 		.then()
@@ -133,6 +155,7 @@ public class CadastroPessoasTest {
 	public void deveRetornar404_QuandoObterPessoaInexistente() {
 		given()
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.get("/{id}", ID_PESSOA_INEXISTENTE)
 		.then()
@@ -145,6 +168,7 @@ public class CadastroPessoasTest {
 			.body(jsonPessoaSemNome)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.post()
 		.then()
@@ -157,6 +181,7 @@ public class CadastroPessoasTest {
 			.body(jsonPessoaEmailInvalido)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.post()
 		.then()
@@ -169,12 +194,26 @@ public class CadastroPessoasTest {
 			.body(jsonPessoaCpfRepetido)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
 		.when()
 			.post()
 		.then()
 			.statusCode(HttpStatus.CONFLICT.value());
 	}
 
+	@Test
+	public void deveRetornar400_QuandoCadastrarPessoaSemEndereco() {
+		given()
+			.body(jsonPessoaSemEndereco)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+			.header("Authorization", BASIC_AUTH_HEADER)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	
 	private void prepararDados() {
 
 		this.fulano = new Pessoa();
@@ -185,6 +224,15 @@ public class CadastroPessoasTest {
 		this.fulano.setNaturalidade("Paulistano");
 		this.fulano.setDataNascimento(LocalDate.of(1998, 3, 10));
 		this.fulano.setSexo(Genero.MASCULINO);
+		
+		Endereco enderecoFulano = new Endereco();
+		enderecoFulano.setCep("13700000");
+		enderecoFulano.setLogradouro("Rua X");
+		enderecoFulano.setBairro("Bairro X");
+		enderecoFulano.setCidade("Cidade X");
+		enderecoFulano.setEstado("SP");
+		
+		this.fulano.setEndereco(enderecoFulano);
 
 		this.fulano = this.repository.save(this.fulano);
 
@@ -196,6 +244,15 @@ public class CadastroPessoasTest {
 		this.ciclana.setNaturalidade("Carioca");
 		this.ciclana.setDataNascimento(LocalDate.of(1996, 9, 1));
 		this.ciclana.setSexo(Genero.FEMININO);
+		
+		Endereco enderecoCiclana = new Endereco();
+		enderecoCiclana.setCep("13700000");
+		enderecoCiclana.setLogradouro("Rua X");
+		enderecoCiclana.setBairro("Bairro X");
+		enderecoCiclana.setCidade("Cidade X");
+		enderecoCiclana.setEstado("SC");
+		
+		this.ciclana.setEndereco(enderecoCiclana);
 
 		this.ciclana = this.repository.save(this.ciclana);
 	}

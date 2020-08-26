@@ -1,4 +1,4 @@
-package br.com.softplan.pessoas.api.model;
+package br.com.softplan.pessoas.api.v2.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Relation(value = "pessoa", collectionRelation = "pessoas")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PessoaModel extends RepresentationModel<PessoaModel> {
+public class PessoaModelV2 extends RepresentationModel<PessoaModelV2> {
 
 	@EqualsAndHashCode.Include
     private Long id;
@@ -42,4 +42,6 @@ public class PessoaModel extends RepresentationModel<PessoaModel> {
 
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private LocalDateTime dataAlteracao;
+    
+    private EnderecoInputV2 endereco;
 }

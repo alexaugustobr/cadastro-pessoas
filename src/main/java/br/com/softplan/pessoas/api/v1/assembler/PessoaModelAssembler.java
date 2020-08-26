@@ -1,4 +1,4 @@
-package br.com.softplan.pessoas.api.assembler;
+package br.com.softplan.pessoas.api.v1.assembler;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -9,8 +9,8 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import br.com.softplan.pessoas.api.controller.PessoaController;
-import br.com.softplan.pessoas.api.model.PessoaModel;
+import br.com.softplan.pessoas.api.v1.controller.PessoaController;
+import br.com.softplan.pessoas.api.v1.model.PessoaModel;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 
 @Component

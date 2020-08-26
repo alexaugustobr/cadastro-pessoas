@@ -1,10 +1,10 @@
 package br.com.softplan.pessoas.util;
 
-import org.springframework.util.StreamUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+
+import org.springframework.util.StreamUtils;
 
 public class ResourceUtils {
     public static String getContentFromResource(String resourceName) {

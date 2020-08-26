@@ -1,4 +1,4 @@
-package br.com.softplan.pessoas.api.controller;
+package br.com.softplan.pessoas.api.v1.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -22,16 +22,16 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.softplan.pessoas.api.assembler.PessoaInputDisassembler;
-import br.com.softplan.pessoas.api.assembler.PessoaModelAssembler;
-import br.com.softplan.pessoas.api.model.PessoaInput;
-import br.com.softplan.pessoas.api.model.PessoaModel;
-import br.com.softplan.pessoas.api.openapi.PessoaControllerOpenAPI;
+import br.com.softplan.pessoas.api.v1.assembler.PessoaInputDisassembler;
+import br.com.softplan.pessoas.api.v1.assembler.PessoaModelAssembler;
+import br.com.softplan.pessoas.api.v1.model.PessoaInput;
+import br.com.softplan.pessoas.api.v1.model.PessoaModel;
+import br.com.softplan.pessoas.api.v1.openapi.PessoaControllerOpenAPI;
 import br.com.softplan.pessoas.domain.model.Pessoa;
 import br.com.softplan.pessoas.domain.service.PessoaService;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping("/v1/pessoas")
 public class PessoaController implements PessoaControllerOpenAPI {
 
     private PessoaService pessoaService;

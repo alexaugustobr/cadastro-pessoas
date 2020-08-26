@@ -1,10 +1,10 @@
-package br.com.softplan.pessoas.api.openapi;
+package br.com.softplan.pessoas.api.v1.openapi;
 
 import org.springframework.hateoas.CollectionModel;
 
 import br.com.softplan.pessoas.api.exception.Problem;
-import br.com.softplan.pessoas.api.model.PessoaInput;
-import br.com.softplan.pessoas.api.model.PessoaModel;
+import br.com.softplan.pessoas.api.v1.model.PessoaInput;
+import br.com.softplan.pessoas.api.v1.model.PessoaModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Pessoas")
 public interface PessoaControllerOpenAPI {
 
+	
     @ApiOperation(value = "Listagem de pessoas", response = PessoaModel.class)
     public CollectionModel<PessoaModel> listar();
 

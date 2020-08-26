@@ -1,0 +1,15 @@
+{
+  "nome": "Beltrano",
+  "sexo": "MASCULINO",
+  "cpf": "256.926.320-63",
+  "dataNascimento": "10/02/1989",
+  "nacionalidade": "Brasileiro",
+  "naturalidade": "Mocoquense",
+  "endereco": {
+  	"cep": "13730000",
+  	"logradouro": "Rua X",
+  	"bairro": "Bairro X",
+  	"cidade": "Cidade X",
+  	"estado": "SP"
+  }
+}

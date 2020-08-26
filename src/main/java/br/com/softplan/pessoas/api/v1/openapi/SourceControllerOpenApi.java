@@ -1,7 +1,6 @@
-package br.com.softplan.pessoas.api.openapi;
+package br.com.softplan.pessoas.api.v1.openapi;
 
-import javax.servlet.http.HttpServletResponse;
-
+import br.com.softplan.pessoas.api.v1.model.SourceModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -9,5 +8,5 @@ import io.swagger.annotations.ApiOperation;
 public interface SourceControllerOpenApi {
 
 	@ApiOperation("Obtém os repositórios das aplicações")
-    public void source(HttpServletResponse response) throws Exception;
+    public SourceModel source() throws Exception;
 }
