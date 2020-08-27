@@ -12,12 +12,15 @@ import br.com.softplan.pessoas.api.v1.openapi.SourceControllerOpenApi;
 @RequestMapping("/v1/source")
 public class SourceController implements SourceControllerOpenApi {
 
-    @Value("${app.source.code.url}")
+    @Value("${source.code.api.url}")
     private String sourceCodeUrl;
+
+    @Value("${source.code.front.url}")
+    private String sourceCodeFrontUrl;
 
     @GetMapping
     public SourceModel source() throws Exception {    
        
-    	return new SourceModel(this.sourceCodeUrl, null);
+    	return new SourceModel(this.sourceCodeUrl, this.sourceCodeFrontUrl);
     }
 }

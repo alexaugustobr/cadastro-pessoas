@@ -8,7 +8,9 @@ spring:
       name: pessoa
       password: 123
 
-app:
-  source:
-    code:
+source:
+  code:
+    api:
       url: https://github.com/william-balan/cadastro-pessoas
+    front:
+      url: https://github.com/william-balan/front-pessoas
