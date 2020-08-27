@@ -1,20 +1,20 @@
-build-test-db:
+build-test-db: artifact
 	docker build -t test-db --file Dockerfile-test-db .
 
 test-db: build-test-db
-	docker run --rm -d -p 3306:3306 test-db	
+	docker run -d -p 3306:3306 --name test-db test-db	
 
-tests: test-db
-	./mvnw clean test
-
+tests:
+	chmod +x mvnw
+	./mvnw clean test \
+		&& docker rm -f test-db
+	
 artifact:
-	./mvnw clean package -DskipTests
-
+	chmod +x mvnw
+	./mvnw clean package -DskipTests 
+	
 build-api: artifact
 	docker build -t pessoas-api .
 
-run:
+run: artifact
 	docker-compose up
-
-setup:
-	chmod +x mvnw
