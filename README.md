@@ -39,3 +39,34 @@ Para rodar a aplicação, basta utilizar o comando:
 `make run`
 
 Isso irá rodar o docker-compose.
+
+## Utilizando a aplicação
+
+### Rotas
+
+A aplicação é divida entre duas versões V1 e V2.
+
+Para acessar a versão 1 da rota de pessoas:
+
+`/v1/pessoas`
+
+Para acessar a versão 2:
+
+`/v2/pessoas`
+
+Para acessar o source:
+
+`{version}/source`
+
+Para acessar a documentação Swagger:
+
+`/swagger-ui/index.html`
+
+### Autenticação
+
+A autenticação utilizada é do tipo Basic e os dados para acesso são:
+
+```
+usuario=pessoa
+senha=123
+```
